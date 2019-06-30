@@ -143,8 +143,8 @@ function add(node,endpoint,open,close)
             var huristic= function(){
                 //console.log(node['Node'],node['F']); 디버깅용
                 if(line_number!=node['current_line']){
-                    console.log(key,line_number);
-                    new_g+=10;
+                    //console.log(key,line_number);
+                    new_g+=15;
                 }
                 // else if(isContainLine(endpoint,extractline(key))){
                 //     new_g-=1;
@@ -237,7 +237,7 @@ function shortestTransfer(start, end){
  
 }
 
-console.log(shortestTransfer('인천대입구', '동대입구'));
+console.log(shortestTransfer('인천대입구', '제물포'));
 
 
 /*
