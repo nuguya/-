@@ -19,7 +19,7 @@ _remove -> 리스트 아이템 삭제
 
 
 var id=0;
-
+var flag=false;
 var line_list={};
 var sorter = function (a, b) {
     return parseFloat(a.cost) - parseFloat(b.cost);
@@ -50,7 +50,7 @@ function findID(station_nm)
 function contain(list,station_nm,line_num)
 {
     for (var i in list){
-        if(list[i]['Node']==station_nm/*list[i].current_line==line_num*/)
+        if(list[i]['Node']==station_nm&&list[i].current_line==line_num)
             return i;
     }
 
@@ -100,8 +100,6 @@ function _remove(list,m)
 function add(node,endpoint,open,close)
 {
     for (var key in graphData[node['Node']]){
-        
-        
         var temp,list,prev_lineNum,current_lineNum;
         var prev_lineNum=extractline(node['Node']);
         var current_lineNum=extractline(key);
@@ -112,6 +110,11 @@ function add(node,endpoint,open,close)
         // }
         //line_number=isContainLine(line_number,node['Node'].current_line);
         for(var i in line_list){
+            // if(key==endpoint){
+            //     var a={'Node':key,'cost':0,'parent':node,'current_line':current_lineNum};
+            //     open.push(a);
+            //     flag=true;
+            // }
             var line_number=line_list[i];
             //console.log(key,node['Node'],line_number);
             //console.log(key,line_number);
@@ -140,7 +143,7 @@ function add(node,endpoint,open,close)
             var huristic= function(){
                 //console.log(node['Node'],node['F']); 디버깅용
                 if(line_number!=node['current_line']){
-                    //console.log(key,line_number);
+                    console.log(key,line_number);
                     new_g+=10;
                 }
                 // else if(isContainLine(endpoint,extractline(key))){
@@ -197,11 +200,11 @@ function shortestTransfer(start, end){
         close.push(next_node);
         //console.log(close[close.length-1]['Node'],close[close.length-1]['F'],close[close.length-1]['cost']);
         var a = open.splice(0,1);
-        if(next_node['Node']==end){
+        if(next_node['Node']==end||flag){
             var result=makepath(close);
             break;
         }
-        add(next_node,end_line_num,open,close);
+        add(next_node,end,open,close);
     } 
 
     // for (var i in close){
