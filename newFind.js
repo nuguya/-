@@ -200,9 +200,31 @@ function shortestTransfer(start, end){
         close.push(next_node);
         //console.log(close[close.length-1]['Node'],close[close.length-1]['F'],close[close.length-1]['cost']);
         var a = open.splice(0,1);
-        if(next_node['Node']==end||flag){
-            var result=makepath(close);
-            break;
+        if(end=="홍대입구"){
+            if(next_node['Node']==end){
+                var result=makepath(close);
+                break;
+            }
+            else if(next_node['Node']=="홍대입구_A"){
+                var result=makepath(close);
+                break;
+            }
+        }
+        else if(end=="마곡나루"){
+            if(next_node['Node']==end){
+                var result=makepath(close);
+                break;
+            }
+            else if(next_node['Node']=="마곡나루_A"){
+                var result=makepath(close);
+                break;
+            }
+        }
+        else{
+            if(next_node['Node']==end){
+                var result=makepath(close);
+                break;
+            }
         }
         add(next_node,end,open,close);
     } 
@@ -237,7 +259,7 @@ function shortestTransfer(start, end){
  
 }
 
-console.log(shortestTransfer('인천대입구', '제물포'));
+console.log(shortestTransfer('인천대입구', '홍대입구'));
 
 
 /*
